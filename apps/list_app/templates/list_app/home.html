@@ -1,0 +1,48 @@
+<h1>Hello, {{request.session.name}}!</h1>
+<p><a href='/main/addproduct'>Add Product</a> - <a href='/logout'>Log out</a></p>
+<h3>Your Wish List:</h3>
+{%if cur_user.wishlist.all.count == 1%}
+    <p style="color: red">You have no travel plans. :(</p>
+{%endif%}
+<table>
+<thead>
+    <tr>
+        <th>Item</th>
+        <th>Added by</th>
+        <th>Date Added</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+{%for product in user_products%}
+    <tr>
+        <td><a href='/main/items/{{product.id}}'>{{product.name}}</a></td>
+            <td>{{product.created_by.name}}</td>
+            <td>{{product.created_at}}</td>
+            <td><a href='/main/removefromlist/{{product.id}}'>Remove from your list!</a></td>
+    </tr>
+{%endfor%}
+</tbody>
+</table>
+
+<h3>Other Users' Wish List:</h3>
+<table>
+<thead>
+    <tr>
+        <th>Item</th>
+        <th>Added by</th>
+        <th>Date Added</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+{%for product in other_products%}
+    <tr>
+        <td><a href='/main/items/{{product.id}}'>{{product.name}}</a></td>
+            <td>{{product.created_by.name}}</td>
+            <td>{{product.created_at}}</td>
+            <td><a href='/main/addtolist/{{product.id}}'>Add to your list!</a></td>
+    </tr>
+{%endfor%}
+</tbody>
+</table>

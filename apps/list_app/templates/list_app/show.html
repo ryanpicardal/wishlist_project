@@ -1,0 +1,6 @@
+<a href='/main/home'>Home</a> <a href='/logout'>Logout</a> <a href='/main/delete/{{item.id}}'>Delete Item</a>
+    <h1>{{item.name}}</h1>
+    <h3>Users who added this product/item under their wish list:</h3>
+    {%for user in item.wishlist.all%}
+    <p>{{user.name}}</p>
+    {%endfor%}
